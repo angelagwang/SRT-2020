@@ -1,0 +1,29 @@
+﻿Participant ID,Gender,Time in Ghar,Age,PHQ-9,PHQ-9,PHQ-9,PHQ-9,PHQ-9,PHQ-9,PHQ-9,PHQ-9,PHQ-9,Initial Screen: depressive Disorder= four 2 or 3s (including question 1 and 2). Add scores to see severity  (Y/N),Initial Screen- Major Depressive Disorder: five 2 or 3s (one of which is question 1 or 2),Initial Screen- Other Depressive Disorder: two-four 2 or 3s (one of which is question 1 or 2) ,Total: Used to see severity of depressive disorder,Depression Severity
+C105,M,20,26,3,0,0,0,0,0,0,0,0,N,N,N,3,Minimal Depression
+C40,F,35,20,2,1,2,1,3,0,0,0,0,N,N,Y,9,Mild depression
+C30,F,66,32,2,2,2,3,2,3,3,1,0,Y,Y,N,18,Moderately severe depression
+C156 ,M,8,24,0,0,3,0,0,3,0,0,0,N,N,N,6,Mild depression
+C13,M,170,38,0,0,0,0,0,0,0,0,0,N,N,N,0,Minimal Depression
+C10,M,41,22,2,1,0,2,1,3,2,0,0,Y,N,Y,11,Moderate depression
+C46,M,27,20,1,1,0,0,1,1,0,1,0,N,N,N,5,Mild depression
+c157,F,14,24,1,0,0,1,1,0,1,0,0,N,N,N,4,Minimal Depression
+C59,M,30,54,3,0,0,0,0,0,0,0,0,N,N,N,3,Minimal Depression
+C158,F,6,26,1,1,1,3,0,1,0,1,0,N,N,N,8,Mild depression
+C35,F,43,26,2,0,3,0,0,0,2,0,1,N,N,Y,8,Mild depression
+C61,M,34,28,2,2,0,0,0,2,2,1,0,Y,N,Y,9,Mild depression
+C47,F,35,27,0,2,0,2,2,0,2,2,2,Y,Y,N,12,Moderate depression
+C151,F,14,40,0,0,2,2,0,0,2,3,0,Y,N,N,9,Mild depression
+c 22,F,75,35,1,1,0,1,0,1,0,0,1,N,N,N,5,Mild depression
+C160,F,9,29,0,1,0,1,0,3,0,1,0,N,N,N,6,Mild depression
+C163,F,10,32,3,0,0,2,2,0,0,0,2,Y,N,Y,9,Mild depression
+C19,F,10,29,2,1,1,1,3,1,2,1,0,N,N,Y,12,Moderate depression
+C16,F,101,35,3,3,3,1,3,1,2,0,0,Y,Y,N,16,Moderately severe depression
+C108,F,12,22,1,0,0,2,0,0,1,0,0,N,N,N,4,Minimal Depression
+C29,F,96,34,0,1,2,0,0,1,0,0,0,N,N,N,4,Minimal Depression
+C3,F,78,22,1,1,1,2,2,2,1,0,0,N,N,N,10,Moderate depression
+C162,F,9,50,2,0,2,1,0,0,0,0,0,N,N,Y,5,Mild depression
+C49 ,F,78,23,2,0,0,0,0,2,0,0,0,N,N,Y,4,Minimal Depression
+C129,F,18,31,3,0,0,1,3,0,0,0,0,N,N,Y,7,Mild depression
+C20,F,38,50,0,2,0,0,0,2,0,0,0,N,N,Y,4,Minimal Depression
+C53,F,27,46,0,0,0,0,0,0,0,0,0,N,N,N,0,Minimal Depression
+C159,F,4,24,1,2,1,1,3,1,1,3,0,N,N,Y,13,Moderate depression

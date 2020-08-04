@@ -1,0 +1,124 @@
+---
+title: "caregiver-analysis"
+author: "Angela Wang"
+date: "August 4, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(readr)
+library(broom)
+library(knitr)
+library(skimr)
+```
+
+# PHQ-9
+
+```{r load-data-phq9}
+phq9 <- read_csv("Caregiver PHQ9.csv")
+phq9 <- as.tibble(phq9)
+```
+
+## Exploratory Graphs 
+```{r graphs-phq9}
+
+ggplot(data = phq9, aes(x = `Total: Used to see severity of depressive disorder`)) + 
+  geom_histogram(bins = 10, color = "black", fill = "gray") +
+  labs(title = "Depression Scores in Caregivers", x = "Total Depression Score")
+
+
+ggplot(data = phq9, aes(x = `Depression Severity` )) + 
+  geom_bar() +
+  labs(title = "Frequency of Depression Severity in Caregivers", y = "Count")
+
+
+ggplot(data=phq9, mapping = aes(fill= `Depression Severity`, x=`Gender`)) + 
+  geom_bar(position="fill") +
+  labs(title="Relationship between Depression Severity and Gender", y ="Proportion", x = "Gender", fill = "Depression Severity")
+
+
+ggplot( data = phq9, aes( x = `Depression Severity`, y = `Age`)) + 
+  geom_boxplot() + 
+  labs(title = "Relationship between Depression Severity and Age")
+
+
+ggplot( data = phq9, aes(x = `Age`, y =  `Total: Used to see severity of depressive disorder` )) +
+  geom_smooth() +
+  labs(title = "Relationship between Depression Severity and Age", x = "Age", y = "Total Depression Score")
+
+ggplot( data = phq9, aes( x = `Depression Severity`, y = `Time in Ghar`)) + 
+  geom_boxplot() + 
+  labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
+
+ggplot( data = phq9, aes(x = `Time in Ghar` , y =  `Total: Used to see severity of depressive disorder`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Depression Severity and Time in Ghar", x = "Time in Ghar", y = "Total Depression Score")
+```
+
+## Mean/Median/Range of Total Depression Scores
+```{r sum-scores-phq9 }
+summary(phq9$`Total: Used to see severity of depressive disorder`)
+```
+
+## Standard Deviation of Total Depression Scores
+```{r}
+sd(phq9$`Total: Used to see severity of depressive disorder`)
+```
+
+# GAD-7
+```{r load-data-gad7}
+gad7 <- read_csv("Caregiver GAD-7.csv")
+gad7 <- as.tibble(gad7)
+gad7 <- gad7[-c(29, 30), ]
+view(gad7)
+```
+
+## Exploratory Graphs
+```{r graphs-gad7}
+
+ggplot(data = gad7, aes(x = `Scores`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Anxiety Scores in Caregivers", x = "Total Anxiety Score", y = "Count")
+
+
+ggplot(data = gad7, aes(x = `Anxiety Severity` )) + 
+  geom_bar() +
+  labs(title = "Frequency of Anxiety Severity in Caregivers", y = "Count")
+
+ggplot(data= gad7, mapping = aes(fill= `Anxiety Severity`, x=`Gender`)) + 
+  geom_bar(position="fill") +
+  labs(title="Relationship between anxiety severity and gender", y ="Proportion", x = "Gender", fill = "Anxiety Severity")
+
+ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`)) + 
+  geom_boxplot() + 
+  labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
+
+ggplot(data = gad7, aes(x = `Age`, y = `Scores`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Total Anxiety Scores", x= "Age", y = "Total Anxiety Scores")
+
+ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`)) + 
+  geom_boxplot() + 
+  labs(title = "Relationship between Anxiety Severity and Time in Ghar", y = "Time in Ghar (months)")
+
+ggplot(data = gad7, aes(x = `Time in Ghar`, y = `Scores`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Total Anxiety Scores", x= "Time in Ghar (Months)", y = "Total Anxiety Scores")
+```
+
+## Mean/Median/Range of Total Anxiety Scores
+```{r sum-scores-gad7}
+summary(gad7$`Scores`)
+```
+
+## Standard Deviation of Total Anxiety Scores
+```{r}
+sd(gad7$`Scores`)
+```
