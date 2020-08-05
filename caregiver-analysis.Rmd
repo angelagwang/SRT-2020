@@ -44,22 +44,22 @@ ggplot(data=phq9, mapping = aes(fill= `Depression Severity`, x=`Gender`)) +
   labs(title="Relationship between Depression Severity and Gender", y ="Proportion", x = "Gender", fill = "Depression Severity")
 
 
-ggplot( data = phq9, aes( x = `Depression Severity`, y = `Age`, fill = `Depression Severity`)) + 
-  geom_boxplot() + 
-  labs(title = "Relationship between Depression Severity and Age")
-
-
 ggplot( data = phq9, aes(x = `Age`, y =  `Total: Used to see severity of depressive disorder` )) +
   geom_smooth() +
   labs(title = "Relationship between Depression Severity and Age", x = "Age", y = "Total Depression Score")
 
-ggplot( data = phq9, aes( x = `Depression Severity`, y = `Time in Ghar`, fill = `Depression Severity`)) + 
+ggplot( data = phq9, aes( x = `Depression Severity`, y = `Age`, fill = `Gender`)) + 
   geom_boxplot() + 
-  labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
+  labs(title = "Relationship between Depression Severity and Age")
+
 
 ggplot( data = phq9, aes(x = `Time in Ghar`, y = `Total: Used to see severity of depressive disorder`)) +
   geom_smooth() +
-  labs(title = "Relationship between Depression Severity and Time in Ghar", x = "Time in Ghar", y = "Total Depression Score")
+  labs(title = "Relationship between Depression Severity and Time in Ghar", x = "Time in Ghar (months)", y = "Total Depression Score")
+
+ggplot( data = phq9, aes( x = `Depression Severity`, y = `Time in Ghar`, fill = `Gender`)) + 
+  geom_boxplot() + 
+  labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
 ```
 
 ## Mean/Median/Range of Total Depression Scores
@@ -94,23 +94,25 @@ ggplot(data = gad7, aes(x = `Anxiety Severity` )) +
 
 ggplot(data= gad7, mapping = aes(fill= `Anxiety Severity`, x=`Gender`)) + 
   geom_bar(position="fill") +
-  labs(title="Relationship between anxiety severity and gender", y ="Proportion", x = "Gender", fill = "Anxiety Severity")
+  labs(title="Relationship between Anxiety Severity and Gender", y ="Proportion", x = "Gender", fill = "Anxiety Severity")
 
-ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`, fill = `Anxiety Severity`)) + 
-  geom_boxplot() + 
-  labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
 
 ggplot(data = gad7, aes(x = `Age`, y = `Scores`)) +
   geom_smooth() +
   labs(title = "Relationship between Age and Total Anxiety Scores", x= "Age", y = "Total Anxiety Scores")
 
-ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`, fill = `Anxiety Severity`)) + 
+ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Age`, fill = `Gender`)) + 
   geom_boxplot() + 
-  labs(title = "Relationship between Anxiety Severity and Time in Ghar", y = "Time in Ghar (months)")
+  labs(title = "Relationship between Anxiety Severity and Age", y = "Age")
+
 
 ggplot(data = gad7, aes(x = `Time in Ghar`, y = `Scores`)) +
   geom_smooth() +
   labs(title = "Relationship between Time in Ghar and Total Anxiety Scores", x= "Time in Ghar (Months)", y = "Total Anxiety Scores")
+
+ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`, fill = `Gender`)) + 
+  geom_boxplot() + 
+  labs(title = "Relationship between Anxiety Severity and Time in Ghar", y = "Time in Ghar (months)")
 ```
 
 ## Mean/Median/Range of Total Anxiety Scores
@@ -127,16 +129,16 @@ sd(gad7$`Scores`)
 
 ```{r load-data-OBI}
 obi <- read_csv("Caregiver OBI.csv")
-obi <- as.tibble(obi)
 obi <- obi[-c(29, 30), ]
+obi$`Average Burnout Score` <- (obi$`Overall Sum` / 16)
 view(obi)
 ```
 
 ```{r graphs-obi}
 
-ggplot(data = obi, aes(x = `Overall Sum`)) + 
+ggplot(data = obi, aes(x = `Average Burnout Score`)) + 
   geom_histogram(bins = 10,color = "black", fill = "gray") +
-  labs(title = "Overall Burnout Scores in Caregivers", x = "Overall Burnout Score", y = "Count")
+  labs(title = "Average Burnout Scores in Caregivers", x = "Average Burnout Score", y = "Count")
 
 ggplot(data = obi, aes(x = `Disengagement Mean`)) + 
   geom_histogram(bins = 10,color = "black", fill = "gray") +
@@ -146,9 +148,9 @@ ggplot(data = obi, aes(x = `Exhaustion Mean`)) +
   geom_histogram(bins = 10,color = "black", fill = "gray") +
   labs(title = "Mean Exhaustion Scores in Caregivers", x = "Mean Exhaustion Score", y = "Count")
 
-ggplot(data = obi, aes(x = `Gender`, y = `Overall Sum`, fill = `Gender`)) + 
+ggplot(data = obi, aes(x = `Gender`, y = `Average Burnout Score`, fill = `Gender`)) + 
   geom_boxplot() +
-  labs(title = "Relationship between Overall Burnout Scores and Gender", x = "Overall Burnout Score", y = "Gender", fill = "Gender")
+  labs(title = "Relationship between Average Burnout Scores and Gender", x = "Average Burnout Score", y = "Gender", fill = "Gender")
 
 ggplot(data = obi, aes(x = `Gender`, y = `Disengagement Mean`, fill = `Gender`)) + 
   geom_boxplot() +
@@ -158,9 +160,9 @@ ggplot(data = obi, aes(x = `Gender`, y = `Exhaustion Mean`, fill = `Gender`)) +
   geom_boxplot() +
   labs(title = "Relationship between Mean Exhaustion Scores and Gender", x = " Mean Exhaustion Scores", y = "Gender", fill = "Gender")
 
-ggplot(data = obi, aes(x = `Age`, y = `Overall Sum`)) +
+ggplot(data = obi, aes(x = `Age`, y = `Average Burnout Score`)) +
   geom_smooth() +
-  labs(title = "Relationship between Age and Overall Burnout Scores", x= "Age", y = "Overall Burnout Scores")
+  labs(title = "Relationship between Age and Average Burnout Scores", x= "Age", y = "Average Burnout Scores")
 
 ggplot(data = obi, aes(x = `Age`, y = `Disengagement Mean`)) +
   geom_smooth() +
@@ -170,7 +172,7 @@ ggplot(data = obi, aes(x = `Age`, y = `Exhaustion Mean`)) +
   geom_smooth() +
   labs(title = "Relationship between Age and Mean Exhaustion Scores", x= "Age", y = "Mean Exhaustion Scores")
 
-ggplot(data = obi, aes(x = `Time in Ghar`, y = `Overall Sum`)) +
+ggplot(data = obi, aes(x = `Time in Ghar`, y = `Average Burnout Score`)) +
   geom_smooth() +
   labs(title = "Relationship between Time in Ghar and Overall Burnout Scores", x= "Time in Ghar (months)", y = "Overall Burnout Scores")
 
@@ -178,18 +180,154 @@ ggplot(data = obi, aes(x = `Time in Ghar`, y = `Disengagement Mean`)) +
   geom_smooth() +
   labs(title = "Relationship between Time in Ghar and Mean Disengagement Scores", x= "Time in Ghar(months)", y = "Mean Disengagement Scores")
 
-ggplot(data = obi, aes(x = `Age`, y = `Exhaustion Mean`)) +
+ggplot(data = obi, aes(x = `Time in Ghar`, y = `Exhaustion Mean`)) +
   geom_smooth() +
-  labs(title = "Relationship between Age and Mean Exhaustion Scores", x= "Age", y = "Mean Exhaustion Scores")
+  labs(title = "Relationship between Time in Ghar and Mean Exhaustion Scores", x= "Time in Ghar (months)", y = "Mean Exhaustion Scores")
 
 ```
 
-## Mean/Median/Range of Total Burnout Scores
+## Mean/Median/Range of Average Burnout Scores
 ```{r sum-scores-obi}
-summary(obi$`Overall Sum`)
+summary(obi$`Average Burnout Score`)
 ```
 
-## Standard Deviation of Total Anxiety Scores
+## Standard Deviation of Average Burnout Scores
 ```{r sd-obi}
-sd(obi$`Overall Sum`)
+sd(obi$`Average Burnout Score`)
+```
+
+## Mean/Median/Range of Mean Disengagement Scores
+```{r sum-dis-obi}
+summary(obi$`Disengagement Mean`)
+```
+
+## Standard Deviation of Mean Disengagement Scores
+```{r sd-dis-obi}
+sd(obi$`Disengagement Mean`)
+```
+
+## Mean/Median/Range of Mean Exhaustion Scores
+```{r sum-exh-obi}
+summary(obi$`Exhaustion Mean`)
+```
+
+## Standard Deviation of Mean Exhaustion Scores
+```{r sd-exh-obi}
+sd(obi$`Exhaustion Mean`)
+```
+
+# MHC-SF
+```{r load-data-mhc}
+mhc <- read_csv("Caregiver MHC-SF.csv")
+mhc <- mhc[-c(29, 30), ]
+mhc$`Overall Average` <- (mhc$`Overall` / 14)
+view(mhc)
+```
+
+
+```{r graphs-mhc}
+
+ggplot(data = mhc, aes(x = `Overall Average`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Average Overall Wellbeing Scores in Caregivers", x = "Average Mental Wellbeing Score", y = "Count")
+
+ggplot(data = mhc, aes(x = `EWB Average`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Average Emotional Wellbeing in Caregivers", x = "Average Emotional Wellbeing Score", y = "Count")
+
+ggplot(data = mhc, aes(x = `SWB Average`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Average Social Wellbeing in Caregivers", x = "Average Social Wellbeing Score", y = "Count")
+
+ggplot(data = mhc, aes(x = `PWB Average`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Average Psychological Wellbeing in Caregivers", x = "Average Psychological Wellbeing Score", y = "Count")
+
+ggplot(data = mhc, aes(x = `Gender`, y = `Overall Average`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Average Mental Wellbeing Scores and Gender", x = "Average Mental Wellbeing Score", y = "Gender", fill = "Gender")
+
+ggplot(data = mhc, aes(x = `Gender`, y = `EWB Average`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Average Emotional Wellbeing and Gender", x = "Average Emotional Wellbeing Scores", y = "Gender", fill = "Gender")
+
+ggplot(data = mhc, aes(x = `Gender`, y = `SWB Average`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Average Social Wellbeing and Gender", x = "Average Social Wellbeing Scores", y = "Gender", fill = "Gender")
+
+ggplot(data = mhc, aes(x = `Gender`, y = `PWB Average`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Average Psychological Wellbeing and Gender", x = "Average Psychological Wellbeing Scores", y = "Gender", fill = "Gender")
+
+ggplot(data = mhc, aes(x = `Age`, y = `Overall Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Average Mental Wellbeing", x= "Age", y = "Average Mental Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Age`, y = `EWB Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Average Emotional Wellbeing", x= "Age", y = "Average Emotional Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Age`, y = `SWB Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Average Social Wellbeing", x= "Age", y = "Average Social Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Age`, y = `PWB Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Average Pscyhological Wellbeing", x= "Age", y = "Average Psychological Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Time in Ghar in Months`, y = `Overall Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Overall Mental Wellbeing", x= "Time in Ghar (months)", y = "Overall Mental Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Time in Ghar in Months`, y = `EWB Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Average Emotional Wellbeing", x= "Time in Ghar(months)", y = "Average Emotional Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Time in Ghar in Months`, y = `SWB Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Average Social Wellbeing", x= "Time in Ghar(months)", y = "Average Social Wellbeing Scores")
+
+ggplot(data = mhc, aes(x = `Time in Ghar in Months`, y = `PWB Average`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Average Psychological Wellbeing", x= "Time in Ghar(months)", y = "Average Psychological Wellbeing Scores")
+```
+
+## Mean/Median/Range of Average Mental Wellbeing Scores
+```{r sum-scores-mhc}
+summary(mhc$`Overall Average`)
+```
+
+## Standard Deviation of Average Burnout Scores
+```{r sd-mhc}
+sd(mhc$`Overall Average`)
+```
+
+## Mean/Median/Range of Average Emotional Wellbeing Scores
+```{r sum-ewb-obi}
+summary(mhc$`EWB Average`)
+```
+
+## Standard Deviation of Average Emotional Wellbeing Scores
+```{r sd-ewb-obi}
+sd(mhc$`EWB Average`)
+```
+
+## Mean/Median/Range of Average Social Wellbeing Scores
+```{r sum-swb-obi}
+summary(mhc$`SWB Average`)
+```
+
+## Standard Deviation of Average Social Wellbeing Scores
+```{r sd-swb-obi}
+sd(mhc$`SWB Average`)
+```
+
+## Mean/Median/Range of Average Psychological Wellbeing Scores
+```{r sum-pwb-obi}
+summary(mhc$`PWB Average`)
+```
+
+## Standard Deviation of Average Psychological Wellbeing Scores
+```{r sd-pwb-obi}
+sd(mhc$`PWB Average`)
 ```
