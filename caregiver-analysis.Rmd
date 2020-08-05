@@ -30,7 +30,7 @@ phq9 <- as.tibble(phq9)
 ```{r graphs-phq9}
 
 ggplot(data = phq9, aes(x = `Total: Used to see severity of depressive disorder`)) + 
-  geom_histogram(bins = 10, color = "black", fill = "gray") +
+  geom_histogram( bins = 10, color = "black", fill = "gray") +
   labs(title = "Depression Scores in Caregivers", x = "Total Depression Score")
 
 
@@ -44,7 +44,7 @@ ggplot(data=phq9, mapping = aes(fill= `Depression Severity`, x=`Gender`)) +
   labs(title="Relationship between Depression Severity and Gender", y ="Proportion", x = "Gender", fill = "Depression Severity")
 
 
-ggplot( data = phq9, aes( x = `Depression Severity`, y = `Age`)) + 
+ggplot( data = phq9, aes( x = `Depression Severity`, y = `Age`, fill = `Depression Severity`)) + 
   geom_boxplot() + 
   labs(title = "Relationship between Depression Severity and Age")
 
@@ -53,11 +53,11 @@ ggplot( data = phq9, aes(x = `Age`, y =  `Total: Used to see severity of depress
   geom_smooth() +
   labs(title = "Relationship between Depression Severity and Age", x = "Age", y = "Total Depression Score")
 
-ggplot( data = phq9, aes( x = `Depression Severity`, y = `Time in Ghar`)) + 
+ggplot( data = phq9, aes( x = `Depression Severity`, y = `Time in Ghar`, fill = `Depression Severity`)) + 
   geom_boxplot() + 
   labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
 
-ggplot( data = phq9, aes(x = `Time in Ghar` , y =  `Total: Used to see severity of depressive disorder`)) +
+ggplot( data = phq9, aes(x = `Time in Ghar`, y = `Total: Used to see severity of depressive disorder`)) +
   geom_smooth() +
   labs(title = "Relationship between Depression Severity and Time in Ghar", x = "Time in Ghar", y = "Total Depression Score")
 ```
@@ -68,7 +68,7 @@ summary(phq9$`Total: Used to see severity of depressive disorder`)
 ```
 
 ## Standard Deviation of Total Depression Scores
-```{r}
+```{r sd-phq9}
 sd(phq9$`Total: Used to see severity of depressive disorder`)
 ```
 
@@ -96,7 +96,7 @@ ggplot(data= gad7, mapping = aes(fill= `Anxiety Severity`, x=`Gender`)) +
   geom_bar(position="fill") +
   labs(title="Relationship between anxiety severity and gender", y ="Proportion", x = "Gender", fill = "Anxiety Severity")
 
-ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`)) + 
+ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`, fill = `Anxiety Severity`)) + 
   geom_boxplot() + 
   labs(title = "Relationship between Depression Severity and Time in Ghar", y = "Time in Ghar (months)")
 
@@ -104,7 +104,7 @@ ggplot(data = gad7, aes(x = `Age`, y = `Scores`)) +
   geom_smooth() +
   labs(title = "Relationship between Age and Total Anxiety Scores", x= "Age", y = "Total Anxiety Scores")
 
-ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`)) + 
+ggplot( data = gad7, aes( x = `Anxiety Severity`, y = `Time in Ghar`, fill = `Anxiety Severity`)) + 
   geom_boxplot() + 
   labs(title = "Relationship between Anxiety Severity and Time in Ghar", y = "Time in Ghar (months)")
 
@@ -119,6 +119,77 @@ summary(gad7$`Scores`)
 ```
 
 ## Standard Deviation of Total Anxiety Scores
-```{r}
+```{r sd-gad7}
 sd(gad7$`Scores`)
+```
+
+# OBI
+
+```{r load-data-OBI}
+obi <- read_csv("Caregiver OBI.csv")
+obi <- as.tibble(obi)
+obi <- obi[-c(29, 30), ]
+view(obi)
+```
+
+```{r graphs-obi}
+
+ggplot(data = obi, aes(x = `Overall Sum`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Overall Burnout Scores in Caregivers", x = "Overall Burnout Score", y = "Count")
+
+ggplot(data = obi, aes(x = `Disengagement Mean`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Mean Disengagement Scores in Caregivers", x = "Mean Disengagement Score", y = "Count")
+
+ggplot(data = obi, aes(x = `Exhaustion Mean`)) + 
+  geom_histogram(bins = 10,color = "black", fill = "gray") +
+  labs(title = "Mean Exhaustion Scores in Caregivers", x = "Mean Exhaustion Score", y = "Count")
+
+ggplot(data = obi, aes(x = `Gender`, y = `Overall Sum`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Overall Burnout Scores and Gender", x = "Overall Burnout Score", y = "Gender", fill = "Gender")
+
+ggplot(data = obi, aes(x = `Gender`, y = `Disengagement Mean`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Mean Disengagement Scores and Gender", x = " Mean Disengagement Scores", y = "Gender", fill = "Gender")
+
+ggplot(data = obi, aes(x = `Gender`, y = `Exhaustion Mean`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title = "Relationship between Mean Exhaustion Scores and Gender", x = " Mean Exhaustion Scores", y = "Gender", fill = "Gender")
+
+ggplot(data = obi, aes(x = `Age`, y = `Overall Sum`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Overall Burnout Scores", x= "Age", y = "Overall Burnout Scores")
+
+ggplot(data = obi, aes(x = `Age`, y = `Disengagement Mean`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Mean Disengagement Scores", x= "Age", y = "Mean Disengagement Scores")
+
+ggplot(data = obi, aes(x = `Age`, y = `Exhaustion Mean`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Mean Exhaustion Scores", x= "Age", y = "Mean Exhaustion Scores")
+
+ggplot(data = obi, aes(x = `Time in Ghar`, y = `Overall Sum`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Overall Burnout Scores", x= "Time in Ghar (months)", y = "Overall Burnout Scores")
+
+ggplot(data = obi, aes(x = `Time in Ghar`, y = `Disengagement Mean`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Time in Ghar and Mean Disengagement Scores", x= "Time in Ghar(months)", y = "Mean Disengagement Scores")
+
+ggplot(data = obi, aes(x = `Age`, y = `Exhaustion Mean`)) +
+  geom_smooth() +
+  labs(title = "Relationship between Age and Mean Exhaustion Scores", x= "Age", y = "Mean Exhaustion Scores")
+
+```
+
+## Mean/Median/Range of Total Burnout Scores
+```{r sum-scores-obi}
+summary(obi$`Overall Sum`)
+```
+
+## Standard Deviation of Total Anxiety Scores
+```{r sd-obi}
+sd(obi$`Overall Sum`)
 ```
