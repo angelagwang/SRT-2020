@@ -75,12 +75,19 @@ summary(phq9$`Total: Used to see severity of depressive disorder`)
 sd(phq9$`Total: Used to see severity of depressive disorder`)
 ```
 
+## Regression Output
+```{r}
+phq9model <- lm(phq9$`Total: Used to see severity of depressive disorder` ~ phq9$`Age` + phq9$`Gender` + phq9$`Time in Ghar`, data = phq9)
+
+tidy(phq9model, conf.int = TRUE, level = 0.95) %>% 
+  kable(format = "markdown", digits = 5)
+```
+
 # GAD-7
 ```{r load-data-gad7}
 gad7 <- read_csv("Caregiver GAD-7.csv")
 gad7 <- as.tibble(gad7)
 gad7 <- gad7[-c(29, 30), ]
-view(gad7)
 ```
 
 ## Exploratory Graphs
@@ -128,13 +135,20 @@ summary(gad7$`Scores`)
 sd(gad7$`Scores`)
 ```
 
+## Regression Output
+```{r}
+gad7model <- lm(gad7$`Scores` ~ gad7$`Age` + gad7$`Gender` + gad7$`Time in Ghar`, data = gad7)
+
+tidy(gad7model, conf.int = TRUE, level = 0.95) %>% 
+  kable(format = "markdown", digits = 5)
+```
+
 # OBI
 
 ```{r load-data-OBI}
 obi <- read_csv("Caregiver OBI.csv")
 obi <- obi[-c(29, 30), ]
 obi$`Average Burnout Score` <- (obi$`Overall Sum` / 16)
-view(obi)
 ```
 
 ```{r graphs-obi}
@@ -219,14 +233,21 @@ summary(obi$`Exhaustion Mean`)
 sd(obi$`Exhaustion Mean`)
 ```
 
+## Regression Output
+```{r}
+obimodel <- lm(obi$`Average Burnout Score` ~ obi$`Age` + obi$`Gender` + obi$`Time in Ghar`, data = obi)
+
+tidy(obimodel, conf.int = TRUE, level = 0.95) %>% 
+  kable(format = "markdown", digits = 5)
+```
+
+
 # MHC-SF
 ```{r load-data-mhc}
 mhc <- read_csv("Caregiver MHC-SF.csv")
 mhc <- mhc[-c(29, 30), ]
 mhc$`Overall Average` <- (mhc$`Overall` / 14)
-view(mhc)
 ```
-
 
 ```{r graphs-mhc}
 
@@ -334,3 +355,12 @@ summary(mhc$`PWB Average`)
 ```{r sd-pwb-obi}
 sd(mhc$`PWB Average`)
 ```
+
+## Regression Output
+```{r}
+mhcmodel <- lm(mhc$`Overall Average` ~ mhc$`Age` + mhc$`Gender` + mhc$`Time in Ghar in Months`, data = mhc)
+
+tidy(mhcmodel, conf.int = TRUE, level = 0.95) %>% 
+  kable(format = "markdown", digits = 5)
+```
+

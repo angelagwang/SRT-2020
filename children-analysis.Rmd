@@ -1,0 +1,89 @@
+---
+title: "Kids Data"
+author: "Angela Wang"
+date: "October 10, 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r load-packages, message=FALSE}
+library(tidyverse)
+library(readr)
+library(broom)
+library(knitr)
+library(skimr)
+library(ggpubr)
+```
+
+# Promis Peer 
+```{r}
+promispeer <- read_csv("Children PROMIS Peer.csv")
+promispeer$`RawScore`<- as.numeric(promispeer$`RawScore`)
+promispeer$`Gender`<- as.factor(promispeer$`Gender`)
+```
+
+```{r}
+ggplot(data = promispeer, aes(x = `RawScore`)) + 
+  geom_histogram( bins = 10, color = "black", fill = "gray") +
+  labs(title = "Distribution of Promis Peer Scores for Children", x = "Total Score")
+
+ggplot(data=promispeer, aes( x=`Gender`, y = `RawScore`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title="Relationship between Total Scores and Gender", y ="Total Score", x = "Gender")
+
+ggplot(data=promispeer, aes( x=`New?`, y = `RawScore`, fill = `New?`)) + 
+  geom_boxplot() +
+  labs(title="Relationship between Total Scores and New Children", y ="Total Score", x = "New or not")
+
+ggplot( data = promispeer, aes(x = `Age`, y =`RawScore` )) +
+  geom_smooth() +
+  labs(title = "Relationship between Total Scores and Age", x = "Age", y = "Total Score")
+```
+
+```{r}
+t.test(promispeer$`RawScore` ~ promispeer$`Gender`, data = promispeer, var.equal = FALSE)
+t.test(promispeer$`RawScore` ~ promispeer$`New?`, data = promispeer, var.equal = FALSE)
+```
+
+The p-value for the T-test comparing PROMIS peer scores between genders is above .05 indicating that there is not a significant difference between PROMIS scores between males and females.
+
+The p-value for the T-test comparing PROMIS peer scores between new and returning children is above than .05 indicating that there is not a significant difference between PROMIS scores between new and returning children.
+
+# Promis Family 
+```{r}
+promisfam <- read_csv("Children PROMIS Family.csv")
+promisfam$`RawScore`<- as.numeric(promisfam$`RawScore`)
+promisfam$`Gender`<- as.factor(promisfam$`Gender`)
+```
+
+```{r}
+ggplot(data = promisfam, aes(x = `RawScore`)) + 
+  geom_histogram( bins = 10, color = "black", fill = "gray") +
+  labs(title = "Distribution of Promis Family Scores for Children", x = "Total Score")
+
+ggplot(data=promisfam, aes( x=`Gender`, y = `RawScore`, fill = `Gender`)) + 
+  geom_boxplot() +
+  labs(title="Relationship between Total Scores and Gender", y ="Total Score", x = "Gender")
+
+ggplot(data=promisfam, aes( x=`New?`, y = `RawScore`, fill = `New?`)) + 
+  geom_boxplot() +
+  labs(title="Relationship between Total Scores and New Children", y ="Total Score", x = "New or not")
+
+ggplot( data = promisfam, aes(x = `Age`, y =`RawScore` )) +
+  geom_smooth() +
+  labs(title = "Relationship between Total Scores and Age", x = "Age", y = "Total Score")
+```
+
+```{r}
+t.test(promisfam$`RawScore` ~ promisfam$`Gender`, data = promisfam, var.equal = FALSE)
+t.test(promisfam$`RawScore` ~ promisfam$`New?`, data = promisfam, var.equal = FALSE)
+```
+
+The p-value for the T-test comparing PROMIS scores between genders is above .05 indicating that there is not a significant difference between PROMIS scores between males and females.
+
+The p-value for the T-test comparing PROMIS scores between new and returning children is less than .05 indicating that there is a significant difference between PROMIS scores between new and returning children.
